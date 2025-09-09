@@ -47,8 +47,11 @@ If you have questions about this program or specific requirements, reach out to 
 - **Programming** - Develop scripting skills for automation and tool creation
 
 ## Your Cyber101 Facilitators:
-- **Carson** (cstownsend@vt.edu) - Always happy to help with technical questions
-- **Sriram** (sriramag@vt.edu) - Great resource for learning strategy and career advice
+- **Carson** (cstownsend@vt.edu) 
+- **Sriram** (sriramag@vt.edu) 
+- **Sean** (seanp17@vt.edu) 
+- **Srivaths** (srivathsa@vt.edu)
+- **Nabiil** (nabiilf@vt.edu)
 
 ---
 
