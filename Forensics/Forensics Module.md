@@ -11,3 +11,4 @@ Understand the tools used to find hidden data inside files
 # Resources
 + [Basic Steganography Tools](https://www.youtube.com/watch?v=iCD6GzCecks&t=104s)
 + [Basics of Steganography(conceptuals from Computerphile)](https://www.youtube.com/watch?v=TWEXCYQKyDc)
++ [Binwalk Tutorial](https://www.youtube.com/watch?v=L0ae3y6FbJQ)
