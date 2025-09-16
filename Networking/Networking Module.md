@@ -11,4 +11,5 @@
   ### Submit these to your respective facilitators. Reference the README for more info. 
 
 # Resources
-
++ [NetworkChuck CCNA Playlist (This contains a lot of useful info related to how networking works)](https://www.youtube.com/watch?v=S7MNX_UD7vY&list=PLIhvC56v63IJVXv0GJcl9vO5Z6znCVb1P)
++ [Quick Netorking Concepts](https://www.youtube.com/watch?v=vtUHgkTKju0)
