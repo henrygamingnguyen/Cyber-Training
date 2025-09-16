@@ -9,3 +9,5 @@ Understand the tools used to find hidden data inside files
   ### Submit these to your respective facilitators. Reference the README for more info. 
 
 # Resources
++ [Basic Steganography Tools](https://www.youtube.com/watch?v=iCD6GzCecks&t=104s)
++ [Basics of Steganography(conceptuals from Computerphile)](https://www.youtube.com/watch?v=TWEXCYQKyDc)
