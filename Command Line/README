@@ -1,1 +1,32 @@
+# Linux Fundamentals Part 1  
+**Linux Journey**
+
+## What I knew before the lesson
+- I knew nothing about Linux, besides it being an OS.  
+- I didn't know how to run commands. The CTF meetings always held me puzzled—I did not know what my peers were doing.
+
+## Difficulties I faced during the lessons
+- Trying to understand what each command does and memorize their syntax.  
+- Trying to understand what task I was trying to accomplish.
+
+## What I learned after the lessons
+- I understood how to run commands in Linux such as:  
+  - `ls` (list directory)  
+  - `cd` (change directory)  
+  - `cat` (output file)  
+  - `pwd` (print working directory)  
+- Keeping track of the file path was quite a hassle, but I got the hang of it.  
+- The shell operators were new concepts. Although I understood what they do:  
+  - `&` → run command in background  
+  - `&&` → run multiple commands in order  
+  - `>` → overwrite an output  
+  - `>>` → append an output  
+  I wonder what I can do further with these commands.
+
+## What I want to know more about
+- `sudo` commands
+
+
+Windows Command Line
+Windows Fundamental Part 1
 
