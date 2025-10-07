@@ -1,20 +1,22 @@
-# Linux Fundamentals Part 1  
+## Foundation
+**Linux Fundamentals Part 1**
 **Linux Journey**
 
-## What I knew before the lesson
+*What I knew before the lesson*
 - I knew nothing about Linux, besides it being an OS.  
 - I didn't know how to run commands. The CTF meetings always held me puzzled—I did not know what my peers were doing.
 
-## Difficulties I faced during the lessons
+*Difficulties I faced during the lessons*
 - Trying to understand what each command does and memorize their syntax.  
 - Trying to understand what task I was trying to accomplish.
 
-## What I learned after the lessons
+*What I learned after the lessons*
 - I understood how to run commands in Linux such as:  
   - `ls` (list directory)  
   - `cd` (change directory)  
   - `cat` (output file)  
   - `pwd` (print working directory)  
+  - `man` (view manual)
 - Keeping track of the file path was quite a hassle, but I got the hang of it.  
 - The shell operators were new concepts. Although I understood what they do:  
   - `&` → run command in background  
@@ -23,10 +25,185 @@
   - `>>` → append an output  
   I wonder what I can do further with these commands.
 
-## What I want to know more about
+*What I want to know more about*
 - `sudo` commands
 
 
-Windows Command Line
-Windows Fundamental Part 1
+**Windows Command Line**
+**Windows Fundamental Part 1**
 
+*What I knew before the lesson*
+- I knew nothing about basic Windows command
+- I understood how to access different directories in Linux, but I was not sure if the process was similar in Windows command prompt
+
+*Difficulties I faced during the lessons*
+- TryHack Me attack box expired, so I had to host a virtual machine on my device. It took me a while to figure out how, but I was able to continue the modules.
+- I was stuck looking into the results the command prompt generated. I did not understand what listening port 135 or 3389 do.
+- I did not understand how to use different options when running netstat
+- Sometimes, when I was modifying files through command prompt, the command starting place was not C:/Users/user and I couldn't run any command. I had to start over.
+
+*What I learned after the lessons*
+- I learned to log in my ip credentials in windows command prompt
+- I learned how to check windows version using **ver** command, and network status using **netstat**, also **nslookup**
+- I learned to ping a website and check its traffic
+- I learned to see active tasks through **tasklist** and kill certain tasks through **taskkill**
+
+*What I want to know more about*
+- I want to learn more about the **tracert** command 
+
+## OverTheWire Bandit 1-15
+**Level 0**
+There was a big confusion over where to run the game. I hope there would be a more clear explanation, but I guess I had to start off on the hard way.
+I tried to install a virtual machine, but it was unyieldy and hardly worked. I also tried to install ubuntu, only to meet countless error. Finally, with some hints from the CyberVT execs, it turns out I can run the game on PowerShell through the ssh command. Alright, let's find the password to level 1.
+**Level 0-1**
+First off, the command is just ls (to list out all files in the directory). Then, the terminal returns a readme. I then used cat readme to output the file.
+The password is ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+Now I just need to ssh again
+I tried to log in with bandit1 credentials, but it kept saying please log out and log in again.
+I wish I had understood sooner, but I was supposed to exit bandit0 and log in with bandit1. Now that I'm on track, let's do bandit1-2!
+**Level 1-2**
+This time, I used the typical ls, which returned -.
+I cannot just say cat -, which returns nothing.
+Thanks to bud Fargo, I learned the hotkey Ctrl-C to get back to bandit1 command if for some reason the input does not have the origin.
+Using the hint from overthewire, I went to a stackoverflow forum and learned I could output a - file using the command cat < - 
+Bud Fargo found out that the - file could also be extracted using cat ./-
+The password is 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+Next
+**Level 2-3**
+This time, the file name is --spaces in this filename--
+Simple Google search may not help. I tried to wrap the string in eithe quotation marks and put a \ before every space, but it doesn't seem to work.
+Remembering what bud Fargo told me before, I guess I could try using the ./ syntax. 
+Here are two new things I learned:
+- if a file has a hyphen in front of it, say cat ./-*string atfer the hyphen*
+- if a file has spaces in it, add a \ before every space
+The password is MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+**Level 3-4**
+A hidden file in a directory? Cool. To start off, another ls. inhere is highlighted in blue, indicating it is a directory. I used pwd to know the directory so far. Then I ran cd /home/bandit3/inhere
+Now if I run ls, there's nothing here. Since there was the command find in the hint, I tried to run find -h, as I thought it would review any hidden file or directory. Nothing was returned. So I tried capital -H. Interestingly, it returned ./...Hiding-From-You
+With this new info, I ran cat ./...Hiding-From-You
+Bing bang bong, the password is 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+**Level 4-5**
+Aight, there seems to be 10 files in the inhere directory. Do I have to check for each of them?
+-file00: ��w��f�y�k��KSv�m�/��DGo��XI'
+-file01: �v��`�Rg.��v0>Oh        �]r�թ�i�L_ �L
+Well, I ain't try to output all of them. Instead, I would look up find human-readable file on DuckDuckGo.
+Here is the stack overflow forum I visited: https://stackoverflow.com/questions/14505218/finding-human-readable-files-on-unix
+the command i needed to perform is file ./-* 
+the file command is used to identify the type of file for each file in the listing. furthermore, the ./-* is used to select the files that start with a hyphen.
+The password is 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+**Level 5-6**
+Based on the hint for this level, I will have to utilize the file or find command even more. This time with 17 directories. Let's see what I can do.
+The first criteria is human-readable. By going to the Ubuntu manual for find provided in the bandit page and searching for the term readable, and surprisingly there's an option called -readable. By running find -readable, I was returned all readable files within every directory of inhere. Still a lot, so let's filter more.
+By running another Internet search, I learned to separate various options using the semicolon. find -readable; -size 1033
+Still a lot of files. Let's apply the last condition. (the semicolon was unncessary tho)
+
+ok you know what? i did not have to do all that. So i learned i could add c after a number to specify byte size. also i should also add another option: -type f (to filter by files)
+
+ and boy, i returned exactly one file: ./maybehere07/.file2
+ The password is HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+ **Level 6-7**
+looks like the hint page is offering a new command to use: grep.
+apparently, grep searches for specific words, phrases, or patterns inside text files. we will see how we can use that later.
+anyways, running ls doesn't return anything, so i guess it's time to backtrack the directory. i.e change directory to /home.
+now, if i run ls again, i get... oh boy, a lot of directories.
+Based on the hint, I would expect to run find -size 33c -user bandit7 -group bandit6, but they all return permission denied files.
+This made me really perplexed for a while. Upon assistance from bud Quiter, I was supposed to run a command that hides all permission denied files. upon another internet search and stack overflow forum, that would be 2>/dev/null.
+the full command I would do was find -user bandit7 -group bandit6 -size 33c 2>/dev/null
+
+well, it did not return anything. I also tried to run the command while I was at /home. There should be another way to search the whole server. fortunately, when I got into that thought and typed onto my search tool, I found the solution I need: find with a forward slash.
+
+running the command again, I got /var/lib/dpkg/info/bandit7.password
+ouputting the file, I would get: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+**Level 7-8**
+ok... why are there so many new commands?
+man, grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+let's try grep because grep was teased. 
+more specifically, another internet search with something like "what terminal command gets the string after a word"
+then I got to https://unix.stackexchange.com/questions/207171/get-value-after-specific-word
+the command I should do was grep -oP "<yourwordhere>\s+\K\w+" data.txt
+according to an answer, 
+-o  ==>  option for printing only the matching part of the line
+-P  ==>  use perl-regexp
+\K  ==>  do not print that comes before \K (zero-width look-behind assertion)
+\w  ==>  match word characters
+password was dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+**Level 8-9**
+once again, the data file is very long. we need to find the line of text that occurs only once.
+looks like there's a new command in the hint: sort. 
+after tinkering with some options, I could sort repeating lines in the same chunk, but I don't want to manually check for a line that appears only once.
+also I noticed another command: uniq.
+in another stack overflow forum: https://stackoverflow.com/questions/48065430/finding-a-line-that-shows-in-a-file-only-once
+i found the command I need: sort data.txt | uniq -u
+the | is used to perform one task after another. the uniq command is literally used to remove repeating lines. how convenience.
+the password is: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+**Level 9-10**
+ok, data.txt contains too much non-readable clutter. at first, I thought grep could do the work. however, having read the manual, there doesn't seem to be any filter that filters away non-readable text. So I looked for another command. oh look, there's a command called strings. I wonder what it does... here goes strings data.txt
+looks like it removes all unreadable text and retains readable texts. let's scroll up.
+looks like there are some lines that starts with ====, followed by words
+gathering them, I got "password is FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey"
+**Level 10-11**
+probably the easiest level if you know what base64 is. let's get over it quick.
+base64 data.txt gets you the encoded info.
+decode it in a base64 decoder online twice, and you get "The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr"
+**Level 11-12**
+THIS IS LITERALLY CAESAR CIPHER WHAT THE HELL???
+go to dcode.fr, bruteforce caesar cipher. "The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4"
+**Level 12-13**
+this level gets me a little confused. hex dump, new commands, lots of stuff to learn.
+so first, i had to go to cd /tmp, then make a new tmp directory through the mktemp -d command, which creates a temporary directory i can work on. going to that directory, i learned to copy data.txt to this new directory. after a research on geekforgeeks, the command was cp /home/bandit12/data.txt hexboy.txt with hexboy being a name i gave for this new file.
+with a new file in the directory, i sought another command that could decompress a hexdump, and one of them was xxd. by including the option -r (reverse), i could decompress hexboy.txt one time and save to a new file called hexboy2.txt throught the command
+xxd -r hexboy.txt hexboy2.txt
+if i output hexboy2.txt, it returns unreadable text. of course, the hint said the password was repeatedly compressed. however, hexboy2.txt isnt a hexdump anymore. the hint provides multiple compress/decompress tools, and after researching each of them, looks like i have to find what the original compression type was applied upon my text file. by using the file command, i was returned the info that it was a gzip compressed file. however, gzip can only work for .gz files, so i found i could move a .txt file into a .gz file using mv command. mv hexboy2.txt hexboy2.gz
+checking the listing again, hexboy2.txt is now hexboy2.gz. my next step would be decompressing that .gz file by including the -d option, as read on geekforgeeks. 
+now i got hexboy2 without any file ending, but if i run the file command on that file, it would say that was a bzip compressed file. okay lmao. so next step would be turning hexboy2 into hexboy2.bz2 and keep decompressing with bzip2 command, but this time i would rename into hexboy3
+after decompressing hexboy3 and running file, its a gzip compressed data. now i know the drill and keep decompressing accordingly.
+now at hexboy4 (or would i say hexboy5 because i forgot to one up hexboy2 the other time, but who cares), it says its a tar archive. there's a tar command in the hint, so let's check it out. luckily from geekforgeeks, there is this command that i could use:
+tar xvf file.tar
+by copying hexboy4 into hexboy5.tar and using the said command, i got data5.bin, which still returns unreadable files. boy, it's another tar archive. doing that again, i got data6.bin. my patience is running thin...
+after extracting data6.tar, i got data8.bin, which is a gzip compressed file. decompressing it, i got
+i got...
+NPESTA REACTION
+The password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+wremhgynwehjvks4ow;ipetvqj0hb 78k95uvh,wym9p8u0v5jo2i3ep3p2kjou,who83q92pok53hm4j9p8u30ta2iokt, whevypan83ouijlk (this is not part of the password, just me yeeting my keyboard)
+from this level, i learned a lot of compressing methods, and how to decompress them. i also learned not to take the hinted commands for granted. pretty rewarding level!
+**Level 13-14**
+For this level, I'm going to leave the description for each command given by the hint:
+*ssh*
+ssh  connects  and  logs into the specified destination, which may be specified as either [user@]hostname or a
+URI of the form ssh://[user@]hostname[:port].
+*Telnet*
+The  telnet  command is used to communicate with another host using the TELNET protocol.  If telnet is invoked without the host argument, it enters command mode, indicated by its prompt (telnet>).  In this  mode,  it  accepts  and  executes  the commands listed below.  If it is invoked with arguments, it performs an open command with those arguments.
+*nc*
+The  nc  (or  netcat) utility is used for just about anything under the sun involving TCP, UDP, or Unix-domain
+sockets.  It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port  scanning,  and  deal  with  both IPv4 and IPv6.  Unlike telnet(1), nc scripts nicely, and separates error messages onto standard error instead of sending them to standard output, as telnet(1) does with some.
+*openssl*
+kinda long so I put a link to its documentation here: https://docs.openssl.org/master/man1/openssl/#standard-commands
+*nmap*
+The output from Nmap is a list of scanned targets, with supplemental information on each depending on the
+options used. Key among that information is the “interesting ports table”.  That table lists the port number
+and protocol, service name, and state. The state is either open, filtered, closed, or unfiltered.  Open means
+that an application on the target machine is listening for connections/packets on that port.  Filtered means
+that a firewall, filter, or other network obstacle is blocking the port so that Nmap cannot tell whether it is
+open or closed.  Closed ports have no application listening on them, though they could open up at any time.
+
+you know what? I don't need these all but ssh. Why? In the manual for ssh, there is this option:
+-i identity_file
+               Selects  a  file from which the identity (private key) for public key authentication is read.  You can
+               also specify a public key file to use the corresponding private key that  is  loaded  in  ssh-agent(1)
+               when  the  private  key  file  is not present locally.
+from what I understand (after reseaching further), I can refer to a file in the file explorer through location path. If I were to store in a notepad and save it as a .private file, then i use the command above to refer to the private key, and attach bandit14, that should work.
+and it worked.
+**Level 14-15**
+first, i need to find the password of the current level, which was hinted in level 13-14 as "/etc/bandit_pass/bandit14"
+by changing directory to /home/etc/bandit_pass, then outputting bandit14, I got the password: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+exiting bandit14, now i try to ssh to my localhost (my computer)
+first, i need to know my localhost username. using the command whoami lets me know that
+then 
+ok i fell into a dead end. apparently, i cannot run any command like sudo or apt or whatever if my terminal is user, though it said localhost. so i decided to go back to bandit14 terminal.
+what i tried to do was running telnet. i learned from the previous level that telnet is used to communicate with another host, so i can use telnet to communicate with my localhost at port 30000. upon further research, the command i should do is telnet localhost 30000
+then it connected to my localhost, but i did not know what to do next. only when i hit enter, it said wrong password. i knew i would paste level 14 password here. then, it said correct and returned level 15 password.
+
+the password is 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+anddddd we are done with the required module for bandit. this felt like being stuck for a very long time, but it kinda trained my "googling" skill to get the information i need on a certain command. there is no way i would know how to run every command, but by searching what the command does and how different files can be accessed, there is a path to proceed along the game.
+command line is, to be honest, tedious and time-consuming. nevertheless, i am proud to have learned the basic of cybersecurity, something i have never learned before. time to go for cryptography.
